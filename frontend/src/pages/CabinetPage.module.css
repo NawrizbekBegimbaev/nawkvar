@@ -1,0 +1,310 @@
+.page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 32px 40px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.addBtn {
+  border: 1.5px solid var(--dark);
+  color: var(--dark);
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.addBtn:hover {
+  background: var(--dark);
+  color: var(--white);
+}
+
+.empty {
+  text-align: center;
+  color: var(--text-secondary);
+  padding: 60px;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 80px 0;
+}
+
+.emptyState p {
+  font-size: 18px;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+.addBtnFilled {
+  display: inline-block;
+  background: var(--dark);
+  color: var(--white);
+  padding: 12px 24px;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+}
+
+.tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 24px;
+  border-bottom: 2px solid var(--border);
+}
+
+.tab {
+  background: none;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  padding: 10px 20px;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tab:hover {
+  color: var(--text);
+}
+
+.tabActive {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+  font-weight: 600;
+}
+
+.tabCount {
+  background: var(--border);
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.tabActive .tabCount {
+  background: var(--sage);
+  color: var(--text);
+}
+
+.cardSold {
+  opacity: 0.6;
+}
+
+.cardSold .cardImage img {
+  filter: grayscale(0.5);
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card {
+  display: flex;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  height: 140px;
+}
+
+.cardImage {
+  width: 200px;
+  min-width: 200px;
+  height: 100%;
+  background: var(--border);
+}
+
+.cardImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cardInfo {
+  padding: 16px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.cardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cardPrice {
+  font-size: 20px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.badge {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+.badgeActive {
+  background: var(--sage);
+  color: var(--text);
+}
+
+.badgeSold {
+  background: var(--red);
+  color: var(--white);
+}
+
+.cardRooms {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.cardActions {
+  display: flex;
+  gap: 16px;
+}
+
+.actionEdit {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--accent);
+}
+
+.actionEdit:hover {
+  text-decoration: underline;
+}
+
+.actionSold {
+  background: none;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.actionSold:hover {
+  color: var(--text);
+}
+
+.actionDelete {
+  background: none;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--red);
+}
+
+.actionDelete:hover {
+  text-decoration: underline;
+}
+
+/* Confirm Modal */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+
+.modal {
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  padding: 32px;
+  width: 380px;
+  text-align: center;
+}
+
+.modalTitle {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.modalText {
+  font-size: 15px;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+}
+
+.modalActions {
+  display: flex;
+  gap: 12px;
+}
+
+.cancelBtn,
+.confirmBtn,
+.deleteBtn {
+  flex: 1;
+  height: 44px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.cancelBtn {
+  background: var(--white);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+.cancelBtn:hover {
+  background: #f5f5f5;
+}
+
+.confirmBtn {
+  background: var(--dark);
+  color: var(--white);
+}
+
+.confirmBtn:hover {
+  background: #3a3a3a;
+}
+
+.deleteBtn {
+  background: var(--red);
+  color: var(--white);
+}
+
+.deleteBtn:hover {
+  filter: brightness(0.9);
+}
+
+@media (max-width: 768px) {
+  .page {
+    padding: 20px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .cardImage {
+    width: 120px;
+    min-width: 120px;
+  }
+}
