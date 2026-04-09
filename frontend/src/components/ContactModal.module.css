@@ -2,6 +2,8 @@
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9,13 +11,14 @@
 }
 
 .modal {
-  background: var(--white);
+  background: #fff;
   border-radius: var(--radius-xl);
-  padding: 32px;
+  padding: 36px;
   width: 400px;
   max-width: 90vw;
   text-align: center;
   position: relative;
+  box-shadow: var(--shadow-xl);
 }
 
 .close {
@@ -26,6 +29,7 @@
   font-size: 24px;
   color: var(--text-secondary);
   line-height: 1;
+  transition: color 0.2s;
 }
 
 .close:hover {
@@ -34,8 +38,9 @@
 
 .title {
   font-size: 22px;
-  font-weight: 600;
-  margin-bottom: 24px;
+  font-weight: 700;
+  margin-bottom: 28px;
+  color: var(--text);
 }
 
 .telegramBtn,
@@ -43,12 +48,12 @@
   display: block;
   width: 100%;
   padding: 14px;
-  border-radius: var(--radius-md);
+  border-radius: 980px;
   font-size: 15px;
   font-weight: 600;
-  color: var(--white);
+  color: #fff;
   text-align: center;
-  transition: filter 0.2s;
+  transition: all 0.2s;
 }
 
 .telegramBtn {
@@ -57,16 +62,23 @@
 }
 
 .callBtn {
-  background: var(--accent);
+  background: #1a7f37;
 }
 
-.telegramBtn:hover,
+.telegramBtn:hover {
+  background: #1e8ec8;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(34, 158, 217, 0.3);
+}
+
 .callBtn:hover {
-  filter: brightness(0.9);
+  background: #15692e;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(26, 127, 55, 0.3);
 }
 
 .phone {
-  margin-top: 12px;
+  margin-top: 16px;
   font-size: 14px;
   color: var(--text-secondary);
 }

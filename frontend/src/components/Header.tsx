@@ -14,17 +14,17 @@ export default function Header() {
   return (
     <header className={styles.header}>
       <Link to="/" className={styles.logo}>nawkvar</Link>
-      <div className={styles.actions}>
+      <nav className={styles.actions}>
         {isAuth ? (
           <>
             <Link to="/cabinet" className={styles.link}>Кабинет</Link>
-            <Link to="/create" className={styles.btn}>Я сдаю</Link>
+            <Link to="/create" className={styles.btn}>Разместить</Link>
             <button onClick={handleLogout} className={styles.logoutBtn}>Выйти</button>
           </>
         ) : (
-          <Link to="/register" className={styles.btn}>Я сдаю</Link>
+          <Link to="/register" className={styles.btn}>Разместить</Link>
         )}
-      </div>
+      </nav>
     </header>
   );
 }

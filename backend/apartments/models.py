@@ -7,7 +7,6 @@ class Apartment(models.Model):
         ACTIVE = 'ACTIVE', 'Active'
         SOLD = 'SOLD', 'Sold'
 
-    title = models.CharField(max_length=255)
     price = models.DecimalField(max_digits=12, decimal_places=2)
     rooms = models.PositiveIntegerField()
     description = models.TextField(blank=True, default='')
@@ -19,7 +18,7 @@ class Apartment(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.title
+        return f"{self.rooms}-комн. {self.price} сум"
 
 
 class ApartmentImage(models.Model):
@@ -28,4 +27,4 @@ class ApartmentImage(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Image for {self.apartment.title}"
+        return f"Image for apartment #{self.apartment.id}"

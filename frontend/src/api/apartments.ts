@@ -8,7 +8,6 @@ export interface ApartmentImage {
 
 export interface Apartment {
   id: number;
-  title: string;
   price: string;
   rooms: number;
   description: string;

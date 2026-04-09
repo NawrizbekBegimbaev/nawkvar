@@ -8,7 +8,6 @@ import styles from './ApartmentForm.module.css';
 export default function CreateApartmentPage() {
   const { isAuth } = useAuth();
   const navigate = useNavigate();
-  const [title, setTitle] = useState('');
   const [price, setPrice] = useState('');
   const [rooms, setRooms] = useState('');
   const [description, setDescription] = useState('');
@@ -24,49 +23,61 @@ export default function CreateApartmentPage() {
   }, [isAuth, navigate]);
 
   useEffect(() => {
-    let mapInstance: any = null;
+    let map: any = null;
 
-    const initMap = () => {
-      const ymaps = (window as any).ymaps;
-      ymaps.ready(() => {
-        if (mapInstance) return;
-        mapInstance = new ymaps.Map('location-map', {
-          center: [lat, lng],
-          zoom: 14,
-          controls: ['zoomControl'],
-        });
-        const placemark = new ymaps.Placemark([lat, lng], {}, { draggable: true });
-        mapInstance.geoObjects.add(placemark);
+    const initMap = async () => {
+      const ymaps3 = (window as any).ymaps3;
+      await ymaps3.ready;
 
-        placemark.events.add('dragend', () => {
-          const coords = placemark.geometry.getCoordinates();
-          setLat(coords[0]);
-          setLng(coords[1]);
-        });
+      const mapEl = document.getElementById('location-map');
+      if (!mapEl || mapEl.children.length > 0) return;
 
-        mapInstance.events.add('click', (e: any) => {
-          const coords = e.get('coords');
-          placemark.geometry.setCoordinates(coords);
-          setLat(coords[0]);
-          setLng(coords[1]);
-        });
-      });
+      const { YMap, YMapDefaultSchemeLayer, YMapDefaultFeaturesLayer, YMapMarker, YMapListener, YMapControls } = ymaps3;
+      const { YMapZoomControl } = await ymaps3.import('@yandex/ymaps3-controls@0.0.1');
+
+      map = new YMap(mapEl, { location: { center: [lng, lat], zoom: 14 } });
+      map.addChild(new YMapDefaultSchemeLayer());
+      map.addChild(new YMapDefaultFeaturesLayer());
+      map.addChild(new YMapControls({ position: 'right' }).addChild(new YMapZoomControl({})));
+
+      const pinEl = document.createElement('div');
+      pinEl.style.cssText = 'width:24px;height:24px;background:#0071e3;border:3px solid #fff;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,0.3);cursor:grab;transform:translate(-50%,-50%);';
+
+      let currentMarker = new YMapMarker({
+        coordinates: [lng, lat] as [number, number],
+        draggable: true,
+        onDragEnd: (coords: [number, number]) => { setLng(coords[0]); setLat(coords[1]); },
+      }, pinEl);
+      map.addChild(currentMarker);
+
+      map.addChild(new YMapListener({
+        onClick: (_: any, e: any) => {
+          if (e?.coordinates) {
+            setLng(e.coordinates[0]);
+            setLat(e.coordinates[1]);
+            map.removeChild(currentMarker);
+            currentMarker = new YMapMarker({
+              coordinates: e.coordinates,
+              draggable: true,
+              onDragEnd: (coords: [number, number]) => { setLng(coords[0]); setLat(coords[1]); },
+            }, pinEl);
+            map.addChild(currentMarker);
+          }
+        },
+      }));
     };
 
-    if ((window as any).ymaps) {
+    if ((window as any).ymaps3) {
       initMap();
     } else {
       const script = document.createElement('script');
-      script.src = 'https://api-maps.yandex.ru/2.1/?apikey=YOUR_API_KEY&lang=ru_RU';
+      script.src = 'https://api-maps.yandex.ru/v3/?apikey=76f1e88b-b85d-490e-af5b-e7ba7af75575&lang=ru_RU';
       script.onload = initMap;
       document.head.appendChild(script);
     }
 
     return () => {
-      if (mapInstance) {
-        mapInstance.destroy();
-        mapInstance = null;
-      }
+      if (map) { map.destroy(); map = null; }
     };
   }, []);
 
@@ -97,7 +108,6 @@ export default function CreateApartmentPage() {
     setLoading(true);
 
     const formData = new FormData();
-    formData.append('title', title);
     formData.append('price', price);
     formData.append('rooms', rooms);
     formData.append('description', description);
@@ -135,9 +145,6 @@ export default function CreateApartmentPage() {
             <input type="file" accept="image/*" multiple onChange={handleImages} hidden />
           </label>
         </div>
-
-        <label className={styles.label}>Название</label>
-        <input className={styles.input} value={title} onChange={(e) => setTitle(e.target.value)} required />
 
         <label className={styles.label}>Цена (сум/мес)</label>
         <input className={styles.input} type="number" value={price} onChange={(e) => setPrice(e.target.value)} required />

@@ -1,11 +1,36 @@
 .page {
   display: flex;
-  height: calc(100vh - 64px);
+  height: calc(100vh - 52px);
 }
 
 .mapPanel {
-  width: 60%;
+  width: 65%;
   position: relative;
+}
+
+.myLocationBtn {
+  position: absolute;
+  bottom: 32px;
+  right: 16px;
+  z-index: 10;
+  background: #fff;
+  border: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-lg);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  color: var(--accent);
+}
+
+.myLocationBtn:hover {
+  transform: scale(1.08);
+  box-shadow: var(--shadow-xl);
 }
 
 .map {
@@ -14,31 +39,34 @@
 }
 
 .listPanel {
-  width: 40%;
+  width: 35%;
   background: var(--bg);
-  padding: 24px;
+  padding: 28px;
   overflow-y: auto;
+  border-left: 1px solid var(--border);
 }
 
 .listHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 .listTitle {
-  font-size: 24px;
-  font-weight: 600;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.5px;
 }
 
 .count {
-  background: var(--sage);
-  color: var(--text);
+  background: var(--surface);
+  color: var(--text-secondary);
   font-size: 13px;
   font-weight: 500;
-  padding: 4px 12px;
-  border-radius: 20px;
+  padding: 4px 14px;
+  border-radius: 980px;
 }
 
 .cards {
@@ -49,24 +77,25 @@
 
 .card {
   display: flex;
-  background: var(--white);
+  background: #fff;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow);
   overflow: hidden;
-  transition: transform 0.2s, box-shadow 0.2s;
-  height: 140px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 148px;
+  cursor: pointer;
 }
 
 .card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
 }
 
 .cardImage {
   width: 200px;
   min-width: 200px;
   height: 100%;
-  background: var(--border);
+  background: var(--surface);
 }
 
 .cardImage img {
@@ -76,7 +105,7 @@
 }
 
 .cardInfo {
-  padding: 16px;
+  padding: 18px 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -84,10 +113,12 @@
 }
 
 .cardPrice {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 700;
   margin-bottom: 4px;
   font-variant-numeric: tabular-nums;
+  color: var(--text);
+  letter-spacing: -0.3px;
 }
 
 .cardRooms {
@@ -102,6 +133,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  line-height: 1.5;
 }
 
 .empty {
@@ -118,16 +150,144 @@
 }
 
 .skeleton {
-  height: 140px;
-  background: linear-gradient(90deg, var(--border) 25%, #f0f0f0 50%, var(--border) 75%);
+  height: 148px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
   background-size: 200% 100%;
   border-radius: var(--radius-lg);
-  animation: shimmer 1.5s infinite;
+  animation: shimmer 1.5s ease infinite;
 }
 
 @keyframes shimmer {
   0% { background-position: 200% 0; }
   100% { background-position: -200% 0; }
+}
+
+/* Detail panel */
+.detail {
+  padding: 0;
+}
+
+.detailBack {
+  background: none;
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 20px;
+  transition: color 0.2s;
+}
+
+.detailBack:hover {
+  color: var(--accent);
+}
+
+.detailGallery {
+  width: 100%;
+  height: 240px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.detailMainImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.detailNoImage {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+}
+
+.detailThumbs {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.detailThumb {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color 0.2s, opacity 0.2s;
+  opacity: 0.7;
+}
+
+.detailThumb:hover {
+  opacity: 1;
+}
+
+.detailThumbActive {
+  border-color: var(--accent);
+  opacity: 1;
+}
+
+.detailPrice {
+  font-size: 26px;
+  font-weight: 700;
+  margin-top: 20px;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+  letter-spacing: -0.3px;
+}
+
+.detailStats {
+  margin-top: 4px;
+}
+
+.detailStat {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.detailDesc {
+  font-size: 15px;
+  color: var(--text);
+  line-height: 1.7;
+  margin-top: 16px;
+}
+
+.detailContactBtn {
+  width: 100%;
+  height: 48px;
+  margin-top: 24px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 980px;
+  font-size: 15px;
+  font-weight: 600;
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.detailContactBtn:hover {
+  background: var(--accent-hover);
+  transform: scale(1.01);
+  box-shadow: 0 4px 16px rgba(0, 113, 227, 0.3);
+}
+
+.detailFullLink {
+  display: block;
+  text-align: center;
+  margin-top: 12px;
+  font-size: 14px;
+  color: var(--accent);
+  font-weight: 500;
+  transition: opacity 0.2s;
+}
+
+.detailFullLink:hover {
+  text-decoration: underline;
+  opacity: 0.85;
 }
 
 @media (max-width: 768px) {
@@ -142,6 +302,8 @@
 
   .listPanel {
     width: 100%;
+    border-left: none;
+    border-top: 1px solid var(--border);
   }
 
   .cardImage {

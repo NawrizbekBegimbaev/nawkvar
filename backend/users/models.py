@@ -33,3 +33,24 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.phone
+
+
+class TelegramChat(models.Model):
+    username = models.CharField(max_length=100, unique=True)
+    chat_id = models.BigIntegerField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"@{self.username} -> {self.chat_id}"
+
+
+class OTP(models.Model):
+    telegram_username = models.CharField(max_length=100)
+    code = models.CharField(max_length=6)
+    created_at = models.DateTimeField(auto_now_add=True)
+    is_used = models.BooleanField(default=False)
+
+    def is_valid(self):
+        from django.utils import timezone
+        from datetime import timedelta
+        return not self.is_used and (timezone.now() - self.created_at) < timedelta(minutes=5)

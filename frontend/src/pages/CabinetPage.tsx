@@ -80,7 +80,7 @@ export default function CabinetPage() {
             <div key={apt.id} className={`${styles.card} ${tab === 'SOLD' ? styles.cardSold : ''}`}>
               <div className={styles.cardImage}>
                 {apt.images[0] && (
-                  <img src={`${apt.images[0].image}`} alt={apt.title} />
+                  <img src={`${apt.images[0].image}`} alt="Квартира" />
                 )}
               </div>
               <div className={styles.cardInfo}>

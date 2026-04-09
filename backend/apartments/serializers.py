@@ -17,7 +17,7 @@ class ApartmentListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Apartment
         fields = [
-            'id', 'title', 'price', 'rooms', 'description',
+            'id', 'price', 'rooms', 'description',
             'latitude', 'longitude', 'status',
             'owner_phone', 'owner_telegram',
             'images', 'created_at', 'updated_at',
@@ -32,7 +32,7 @@ class ApartmentCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Apartment
         fields = [
-            'title', 'price', 'rooms', 'description',
+            'price', 'rooms', 'description',
             'latitude', 'longitude', 'images',
         ]
 
@@ -57,7 +57,7 @@ class ApartmentUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Apartment
         fields = [
-            'title', 'price', 'rooms', 'description',
+            'price', 'rooms', 'description',
             'latitude', 'longitude', 'new_images',
         ]
 

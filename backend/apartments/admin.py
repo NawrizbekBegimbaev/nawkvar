@@ -9,7 +9,7 @@ class ApartmentImageInline(admin.TabularInline):
 
 @admin.register(Apartment)
 class ApartmentAdmin(admin.ModelAdmin):
-    list_display = ['id', 'title', 'price', 'rooms', 'status', 'owner', 'created_at']
+    list_display = ['id', 'price', 'rooms', 'status', 'owner', 'created_at']
     list_filter = ['status', 'rooms']
-    search_fields = ['title', 'description']
+    search_fields = ['description']
     inlines = [ApartmentImageInline]

@@ -34,7 +34,7 @@ export default function ApartmentPage() {
   return (
     <div className={styles.page}>
       <div className={styles.breadcrumb}>
-        <Link to="/">Главная</Link> &rsaquo; <span>{apartment.title}</span>
+        <Link to="/">Главная</Link> &rsaquo; <span>{apartment.rooms}-комн. квартира</span>
       </div>
 
       <div className={styles.content}>
@@ -44,7 +44,7 @@ export default function ApartmentPage() {
               <img
                 className={styles.mainImage}
                 src={`${apartment.images[activeImage].image}`}
-                alt={apartment.title}
+                alt="Квартира"
               />
             ) : (
               <div className={styles.noImage}>Нет фото</div>
